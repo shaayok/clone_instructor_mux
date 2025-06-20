@@ -5,8 +5,6 @@ import styles from './VideoModal.module.css';
 const VideoModal = ({ video, onClose }) => {
   if (!video) return null;
 
-  // video.playbackId comes from Mux after you upload via their API
-  // const { playbackId, timestamp } = video;
   const playbackId = video.url;  
   // const playbackId = video.url;
 
@@ -45,7 +43,6 @@ const VideoModal = ({ video, onClose }) => {
           </div>
 
           <div className={styles.analysisContainer}>
-            {/* AI-analyse van de video komt hier */}
           </div>
         </div>
       </div>
@@ -54,4 +51,3 @@ const VideoModal = ({ video, onClose }) => {
 };
 
 export default VideoModal;
-
