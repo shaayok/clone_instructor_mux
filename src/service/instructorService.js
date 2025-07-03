@@ -86,6 +86,18 @@ export async function stopLesson(lessonId) {
   return lesson;
 }
 
+export async function createStudents() {
+  const options = { method: "GET", redirect: "follow" };
+  const response = await fetchAPI(`${BASE_URL}/api/register`, options);
+  const result = await handleResponse(response);
+  if (!result.success) throw new Error(result.message || "Failed to fetch students");
+  const arr = result.data?.data;
+  if (!Array.isArray(arr) || arr.length === 0) {
+    throw new Error("No students found");
+  }
+  return arr;
+}
+
 
 
 /**
