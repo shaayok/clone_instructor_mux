@@ -8,7 +8,9 @@ export default function LessonDetail({
   onVideoView,
   isStopping,
   isUploading,
-  selectedStudentName
+  selectedStudentName,
+  isCreateStudentOpen,
+  setisCreateStudentOpen
 }) {
   console.log('LessonDetail component rendered with lesson:', lesson);
 
@@ -57,9 +59,14 @@ export default function LessonDetail({
     }
   };
 
+  console.log("isCreateStudentOpenisCreateStudentOpen",isCreateStudentOpen);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
+
+        {isCreateStudentOpen === true && (<h2>{isCreateStudentOpen ? 'Student aanmaken' : ''}</h2>)}
+        
         <h2>{lesson.isCompleted ? 'Voltooide Les Details' : 'Geselecteerde Les'}</h2>
         {!lesson.isCompleted && (
           <div className={styles.buttons}>

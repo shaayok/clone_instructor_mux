@@ -7,6 +7,7 @@ import StudentSelect from './StudentSelect/StudentSelect';
 import Header from '../Header/Header';
 import LessonsPanel from './LessonsPanel/LessonsPanel';
 import LessonDetail from './LessonDetail/LessonDetail';
+import CreateStudent from './CreateStudent/CreateStudent'
 import VideoList from './VideoList/VideoList';
 import VideoUploadModal from './VideoUploadModal/VideoUploadModal';
 import VideoModal from '../VideoPanel/VideoModal';
@@ -50,6 +51,7 @@ export default function InstructorDashboard() {
   const [isLinking, setIsLinking] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isCreateStudentOpen, setisCreateStudentOpen] = useState(false);
 
 
   const { logout } = useAuth();
@@ -100,6 +102,10 @@ export default function InstructorDashboard() {
         setIsLoadingCompletedLessons(false);
       });
   }, [selectedStudent]);
+
+  const handleCreateStudent = ()=>{
+       setisCreateStudentOpen(true);
+  }
 
   const handleStart = () => {
     if (!selectedStudent) return;
@@ -307,6 +313,8 @@ export default function InstructorDashboard() {
 
   const lessonToShow = activeLesson || selectedCompletedLesson;
 
+  console.log("lessonToShowlessonToShowlessonToShow",lessonToShow);
+
   return (
     <div className={styles.page}>
       <Header title="Instructor Dashboard" onLogout={handleLogout} />
@@ -333,6 +341,13 @@ export default function InstructorDashboard() {
             disabled={!selectedStudent || isStarting || isLoadingStudents}
           >
             {isStarting ? 'Bezig met starten...' : 'Les Nu Starten'}
+          </button>
+
+          <button
+            className={styles.startBtn}
+            onClick={()=>{handleCreateStudent()}}
+          >
+          Student aanmaken
           </button>
 
           <LessonsPanel
@@ -366,11 +381,20 @@ export default function InstructorDashboard() {
               isStopping={isStopping}
               isUploading={isUploading}
               selectedStudentName={selectedStudent ? selectedStudent.name : ''}
+              isCreateStudentOpen={isCreateStudentOpen}
+              setisCreateStudentOpen={setisCreateStudentOpen}
             />
           ) : (
             <div className={styles.emptyState}>
               Selecteer een les of start een nieuwe les
             </div>
+          )}
+
+          {isCreateStudentOpen &&(
+            <CreateStudent
+              isCreateStudentOpen={isCreateStudentOpen}
+              setisCreateStudentOpen={setisCreateStudentOpen}
+            />
           )}
 
           {/* <section className={styles.videoSection}>
