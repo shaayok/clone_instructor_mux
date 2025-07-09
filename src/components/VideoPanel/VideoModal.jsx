@@ -1,6 +1,7 @@
 import React from 'react';
 import MuxPlayer from '@mux/mux-player-react';
 import styles from './VideoModal.module.css';
+import ReactMarkdown from 'react-markdown';
 
 const VideoModal = ({ video, onClose }) => {
   if (!video) return null;
@@ -43,6 +44,13 @@ const VideoModal = ({ video, onClose }) => {
           </div>
 
           <div className={styles.analysisContainer}>
+            {video.analysis && (
+              <div className={styles.analysisText}>
+                <ReactMarkdown>
+                  {video.analysis}
+                </ReactMarkdown>
+              </div>
+            )}
           </div>
         </div>
       </div>
